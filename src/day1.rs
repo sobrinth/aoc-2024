@@ -1,5 +1,5 @@
-﻿pub fn part_1(input: &str) -> i32 {
-    let (mut left, mut right): (Vec<_>, Vec<_>) = input
+﻿pub fn generator(input: &str) -> (Vec<i32>, Vec<i32>) {
+    input
         .lines()
         .map(|l| {
             l.split_whitespace()
@@ -7,8 +7,11 @@
                 .collect::<Vec<_>>()
         })
         .map(|v| (v[0], v[1]))
-        .unzip();
+        .unzip()
+}
 
+pub fn part_1(input: &(Vec<i32>, Vec<i32>)) -> i32 {
+    let (mut left, mut right) = input.clone();
     left.sort_unstable();
     right.sort_unstable();
 
@@ -23,6 +26,7 @@
 mod tests {
     use super::*;
 
+    #[test]
     fn part1() {
         let s = "3   4
 4   3
@@ -30,7 +34,6 @@ mod tests {
 1   3
 3   9
 3   3";
-        let a = part_1(s);
-        println!("part1: {a:?}");
+        assert_eq!(part_1(&generator(s)), 11);
     }
 }
