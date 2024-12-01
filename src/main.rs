@@ -1,7 +1,6 @@
-extern crate aoc2024;
-extern crate aoc_runner;
-extern crate aoc_runner_derive;
+mod day1;
 
-use aoc_runner_derive::aoc_main;
-
-aoc_main! { lib = aoc2024}
+aoc_main::main! {
+    year 2024;
+    day1 => part_1;
+}
