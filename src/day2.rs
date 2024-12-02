@@ -13,22 +13,21 @@ pub fn gen(input: &str) -> Vec<Vec<i32>> {
 pub fn part_1(input: &Vec<Vec<i32>>) -> i32 {
     input
         .iter()
-        .map(|r| {
+        .fold(0, |mut acc, r| {
             let mut ok = false;
             ok |= r.iter().tuple_windows().all(|(a, b)| a < b);
             ok |= r.iter().tuple_windows().all(|(a, b)| a > b);
             let low_diff = r.iter().tuple_windows().all(|(a, b)| (a - b).abs() <= 3);
-            ok && low_diff
+            if ok && low_diff { acc += 1 }
+            acc
         })
-        .filter(|x| *x)
-        .count() as i32
 }
 
 pub fn part_2(input: &Vec<Vec<i32>>) -> i32 {
     input
         .iter()
-        .map(|r| {
-            (0..r.len()).any(|i| {
+        .fold(0, |mut acc, r| {
+            if (0..r.len()).any(|i| {
                 let mut rem = r.to_vec();
                 rem.remove(i);
                 let mut ok = false;
@@ -36,10 +35,9 @@ pub fn part_2(input: &Vec<Vec<i32>>) -> i32 {
                 ok |= rem.iter().tuple_windows().all(|(a, b)| a > b);
                 let low_diff = rem.iter().tuple_windows().all(|(a, b)| (a - b).abs() <= 3);
                 ok && low_diff
-            })
+            }) { acc += 1 }
+            acc
         })
-        .filter(|x| *x)
-        .count() as i32
 }
 
 #[cfg(test)]
