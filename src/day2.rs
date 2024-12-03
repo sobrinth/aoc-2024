@@ -52,7 +52,7 @@ mod tests {
         1 3 2 4 5
         8 6 4 4 1
         1 3 6 7 9";
-        assert_eq!(part_1(s), 2);
+        assert_eq!(part_1(&gen(s)), 2);
     }
 
     #[test]
@@ -63,6 +63,6 @@ mod tests {
         1 3 2 4 5
         8 6 4 4 1
         1 3 6 7 9";
-        assert_eq!(part_2(s), 4);
+        assert_eq!(part_2(&gen(s)), 4);
     }
 }
