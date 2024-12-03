@@ -15,29 +15,25 @@ pub fn part_2(input: &str) -> i32 {
 
     regex
         .captures_iter(input)
-        .filter_map(|caps| match &caps["cmd"] {
-            "mul" => {
-                if enable {
-                    if let (Some(x), Some(y)) = (caps.name("x"), caps.name("y")) {
-                        Some(x.as_str().parse::<i32>().unwrap() * y.as_str().parse::<i32>().unwrap())
-                    } else {
-                        None
-                    }
-                } else {
-                    None
+        .fold(0, |mut acc, caps| {
+            match &caps["cmd"] {
+                "mul" => {
+                    if enable {
+                        if let (Some(x), Some(y)) = (caps.name("x"), caps.name("y")) {
+                            acc += x.as_str().parse::<i32>().unwrap() * y.as_str().parse::<i32>().unwrap();
+                        }
+                    };
                 }
+                "don't" => {
+                    enable = false;
+                }
+                "do" => {
+                    enable = true;
+                }
+                _ => (),
             }
-            "don't" => {
-                enable = false;
-                None
-            }
-            "do" => {
-                enable = true;
-                None
-            }
-            _ => None,
+            acc
         })
-        .sum()
 }
 
 #[cfg(test)]
