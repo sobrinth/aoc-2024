@@ -8,5 +8,5 @@ aoc_main::main! {
     day1 : generator => part_1, part_2;
     day2 : gen => part_1, part_2;
     day3 => part_1, part_2;
-    day4 => part_1;
+    day4 => part_1, part_2;
 }
